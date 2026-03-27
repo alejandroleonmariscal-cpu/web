@@ -12,7 +12,6 @@ export const pricingContent: PricingSectionProps = {
     { 
       label: "Lavado por kilo", 
       ctaLabel: "Cotizar ahora", 
-      // Link directo de WhatsApp codificado para que no falle
       href: "https://wa.me/523117434207?text=Hola!%20Me%20interesa%20el%20servicio%20de%20lavado%20por%20kilo.",
       note: "Ropa de uso normal (no lavado en seco)" 
     },
@@ -35,10 +34,10 @@ export const pricingContent: PricingSectionProps = {
       note: "Lavado en lavadora Industrial" 
     },
     { 
-      label: "Planchado por docena", 
+      label: "Planchado por pieza o por docena", // <-- EL CAMBIO SOLICITADO
       ctaLabel: "Agendar servicio", 
       href: "https://wa.me/523117434207?text=Hola!%20Quiero%20agendar%20un%20servicio%20de%20planchado%20por%20docena.",
-      note: "12 piezas (Martes a Sábado)" 
+      note: "" // <-- SE BORRÓ "(Martes a Sábado)"
     },
   ],
 
