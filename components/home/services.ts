@@ -8,33 +8,40 @@ export const servicesContent = {
     { 
       title: "Lavado de ropa", 
       description: "Lavado profesional con productos de alta calidad para el cuidado de tus prendas.", 
-      badge: "Popular" 
+      badge: "Popular",
+      image: "/images/lavado-express.webp" 
     },
     { 
       title: "Planchado", 
-      description: "Planchado cuidadoso para que tus prendas luzcan impecables y listas para usar." 
+      description: "Planchado cuidadoso para que tus prendas luzcan impecables y listas para usar.",
+      image: "/images/planchado.webp" 
     },
     { 
       title: "Edredones", 
       description: "Contamos con lavadora Industrial para la limpieza profunda y secado de sus edredones.", 
-      badge: "Especialidad" 
+      badge: "Especialidad",
+      image: "/images/edredones.webp" 
     },
     { 
       title: "Servicio Express", 
       // Texto exacto pedido por el cliente
       description: "Servicio rápido y prioritario para entrega el mismo día.",
-      badge: "Mismo día"
+      badge: "Mismo día",
+      image: "/images/secado-pro.webp" 
     },
     { 
       title: "Servicio a domicilio", 
       // Acotado a zonas específicas para evitar Xalisco/Cantera
       description: "Recogemos y entregamos tu ropa en tu casa o negocio. En la zona centro, Cd del Valle y Libramiento.",
-      badge: "Zona Local"
+      badge: "Zona Local",
+      // 👇 ¡ACTUALIZADO CON LA FOTO QUE ME DISTE! 👇
+      image: "/images/delivery-van.png" 
     },
     {
       title: "Facturación",
       description: "Facturamos todos tus servicios de manera rápida para tu control administrativo.",
-      badge: "Disponible"
+      badge: "Disponible",
+      image: "/images/especial.webp" 
     }
   ]
 };

@@ -103,7 +103,7 @@ export const LocationSection = ({
             <div className="relative bg-white/5 border border-white/10 p-3 rounded-[3rem] shadow-2xl backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-white/20">
               <div className="relative w-full h-[250px] lg:h-[300px] rounded-[2.5rem] overflow-hidden bg-slate-800">
                 <img 
-                  src="/images/local-fachada.jpg" 
+                  src="/images/local-fachada.webp" 
                   alt="Fachada de Lavandería SúperClean en Tepic" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
                 />

@@ -8,6 +8,7 @@ interface Service {
   readonly title: string;
   readonly description: string;
   readonly badge?: string;
+  readonly image: string; // Nueva propiedad para la foto
 }
 
 interface ServicesSectionProps {
@@ -19,81 +20,78 @@ interface ServicesSectionProps {
 
 export const ServicesSection = ({ eyebrow, title, subtitle, services }: ServicesSectionProps) => {
   return (
-    // CAMBIO DE LOOK: Fondo Azul Marino (#0B1B3D) para crear alto contraste con el Hero blanco
-    <Section id="servicios" className="relative py-20 lg:py-32 w-full max-w-none bg-[#0B1B3D]">
+    <Section id="servicios" className="relative py-24 lg:py-40 w-full max-w-none bg-[#0B1B3D]">
       
-      {/* --- IMAGEN GIGANTE DESVANECIDA (Opacidad baja para mantenerlo elegante) --- */}
-      <div className="absolute top-0 right-0 w-full lg:w-2/3 h-full z-0 pointer-events-none overflow-hidden">
-         {/* Aquí pondrás la foto tuya de las máquinas o ropa impecable */}
+      {/* --- FONDO DECORATIVO --- */}
+      <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-0 pointer-events-none opacity-20">
          <img 
            src="/images/services-bg.webp" 
-           alt="Cuidado profesional de ropa" 
-           className="w-full h-full object-cover opacity-20 mix-blend-overlay" 
+           alt="Textura" 
+           className="w-full h-full object-cover mix-blend-overlay" 
          />
-         
-         {/* Máscaras de degradado: Desvanece hacia el Azul Marino */}
          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1B3D] via-[#0B1B3D]/80 to-transparent" />
-         <div className="absolute inset-0 bg-gradient-to-b from-[#0B1B3D] via-transparent to-[#0B1B3D]" />
       </div>
 
-      {/* --- CONTENIDO DE SERVICIOS --- */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* --- NUEVA ALERTA: ÚNICA SUCURSAL --- */}
-        <div className="mb-16 bg-[#FF4A17]/10 border border-[#FF4A17]/30 rounded-2xl p-6 lg:p-8 flex flex-col md:flex-row items-center gap-6 justify-between shadow-2xl backdrop-blur-sm animate-pulse-slow">
-          <div className="flex items-start gap-4">
-            <div className="bg-[#FF4A17] p-3 rounded-full text-white shrink-0 shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            </div>
-            <div className="text-left">
-              <h4 className="text-white font-black text-xl mb-1 drop-shadow-sm">¡Atención! Única Sucursal Oficial</h4>
-              <p className="text-blue-100/70 text-sm md:text-base font-light max-w-2xl leading-relaxed">
-                Para garantizar la calidad que nos distingue desde hace años, te recordamos que NO contamos con sucursales. No te dejes confundir por imitaciones; visítanos únicamente en nuestro local de la Av. Juárez.
-              </p>
-            </div>
+        {/* ALERTA SUCURSAL */}
+        <div className="mb-20 bg-white/5 border border-white/10 rounded-[2.5rem] p-8 flex flex-col md:flex-row items-center gap-6 backdrop-blur-md">
+          <div className="bg-[#FF4A17] p-4 rounded-2xl text-white shadow-[0_0_20px_rgba(255,74,23,0.4)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
+          </div>
+          <div className="text-center md:text-left">
+            <h4 className="text-white font-black text-xl mb-1 italic">¡AVISO IMPORTANTE!</h4>
+            <p className="text-blue-100/50 text-sm font-light">Garantizamos tu ropa solo en nuestra **Única Sucursal Oficial** de Av. Juárez. No tenemos otras ubicaciones.</p>
           </div>
         </div>
-        {/* --- FIN DE ALERTA --- */}
 
-
-        <div className="text-center lg:text-left max-w-3xl mb-16">
-          {eyebrow && (
-            <Badge variant="default" className="mb-4 bg-white/10 text-white border-white/20 backdrop-blur-md px-4 py-1 inline-flex font-bold uppercase tracking-wider text-xs">
-              {eyebrow}
-            </Badge>
-          )}
-          
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-lg tracking-tighter leading-[1.1]">
+        {/* CABECERA */}
+        <div className="text-center lg:text-left max-w-3xl mb-20">
+          <Badge className="mb-6 bg-[#FF4A17]/10 text-[#FF4A17] border-[#FF4A17]/20 px-6 py-2 uppercase font-black tracking-widest text-[10px]">
+            {eyebrow || "Nuestros Servicios"}
+          </Badge>
+          <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-[0.9]">
             {title}
           </h2>
-          <p className="text-lg md:text-xl text-blue-100/70 font-light max-w-2xl leading-relaxed">
+          <p className="text-xl text-blue-100/60 font-light leading-relaxed">
             {subtitle}
           </p>
         </div>
 
-        {/* GRID DE SERVICIOS - Tarjetas Claras sobre fondo oscuro */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* GRID DE SERVICIOS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div 
               key={index} 
-              // Tarjetas blancas con toque de cristal para no ser pesadas
-              className="group relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 shadow-2xl overflow-hidden"
+              className="group bg-white/5 border border-white/10 rounded-[3rem] overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-700 hover:-translate-y-4 shadow-2xl"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FF4A17]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              {/* CONTENEDOR DE IMAGEN */}
+              <div className="relative h-64 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B3D] via-transparent to-transparent opacity-60" />
+                
+                {service.badge && (
+                  <div className="absolute top-6 right-6">
+                    <Badge className="bg-[#FF4A17] text-white border-none px-4 py-1.5 font-black text-[10px] shadow-xl">
+                      {service.badge}
+                    </Badge>
+                  </div>
+                )}
+              </div>
 
-              {service.badge && (
-                <Badge variant="success" className="mb-6 bg-[#FF4A17]/20 text-[#FF4A17] border-[#FF4A17]/30 relative z-10 font-black uppercase tracking-widest text-[10px]">
-                  {service.badge}
-                </Badge>
-              )}
-              
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-4 relative z-10 group-hover:text-[#FF4A17] transition-colors">
-                {service.title}
-              </h3>
-              
-              <p className="text-blue-100/60 text-sm md:text-base leading-relaxed relative z-10 font-light group-hover:text-blue-50 transition-colors">
-                {service.description}
-              </p>
+              {/* TEXTO DE LA CARD */}
+              <div className="p-10">
+                <h3 className="text-2xl font-black text-white mb-4 group-hover:text-[#FF4A17] transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-blue-100/50 leading-relaxed font-light">
+                  {service.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
