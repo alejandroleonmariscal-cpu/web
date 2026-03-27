@@ -2,8 +2,11 @@ import { siteConfig } from "@/content/site.config";
 import { createCTA } from "@/lib/cta";
 
 export const heroContent = {
+  // Un título fuerte para el SEO en Google
   title: "Lavandería y Planchaduría en Tepic",
-  subtitle: "La ropa sucia ya no se lava en casa. Nosotros la lavamos por ti con cuidado profesional.",
+  
+  // EL SLOGAN EXACTO (Sin agregados raros)
+  subtitle: "La ropa sucia ya no se lava en casa, nosotros la lavamos por ti.",
   
   primaryCta: siteConfig.primaryCTA,
   

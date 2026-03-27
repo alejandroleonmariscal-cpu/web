@@ -3,7 +3,6 @@
 import React from 'react';
 import { Section } from '@/components/ui/Section';
 import { Badge } from '@/components/ui/Badge';
-import { ProcessStep } from '@/components/ui/ProcessStep';
 
 interface Step {
   readonly title: string;
@@ -24,68 +23,85 @@ export const ProcessSection = ({
   steps
 }: ProcessSectionProps) => {
   return (
-    <Section id="proceso" className="relative py-24 lg:py-40 w-full max-w-none overflow-hidden bg-[#0F172A]">
+    // CAMBIO DE LOOK: Azul Marino profundo del logo
+    <Section id="proceso" className="relative py-24 lg:py-40 w-full max-w-none overflow-hidden bg-[#0B1B3D]">
       
-      {/* --- EL CAMINITO DE ESPUMA (FONDO) --- */}
+      {/* --- DECORACIÓN DE FONDO (Burbujas y Brillos) --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[20%] left-[10%] w-64 h-64 bg-white/5 rounded-full blur-[100px]" />
-        <div className="absolute top-[50%] right-[15%] w-80 h-80 bg-white/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[10%] left-[20%] w-72 h-72 bg-white/5 rounded-full blur-[110px]" />
+        <div className="absolute top-[10%] left-[-5%] w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[10%] right-[-5%] w-80 h-80 bg-[#FF4A17]/10 rounded-full blur-[100px]" />
         
-        {/* SVG del Caminito - Usamos inline style para la animación para evitar errores de Hydration */}
+        {/* SVG de la línea punteada (Caminito) */}
         <svg 
-          className="hidden lg:block absolute top-[20%] left-1/2 -translate-x-1/2 w-full h-[600px] opacity-20" 
+          className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10" 
           viewBox="0 0 1200 600" 
           fill="none"
         >
           <path 
-            d="M 200 100 Q 600 50 1000 300 T 200 500" 
+            d="M 100 300 Q 300 100 600 300 T 1100 300" 
             stroke="white" 
-            strokeWidth="4" 
-            strokeDasharray="12 12" 
-            style={{
-              animation: 'dash 60s linear infinite'
-            }}
+            strokeWidth="3" 
+            strokeDasharray="10 15"
           />
         </svg>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* CABECERA */}
         <div className="text-center max-w-3xl mx-auto mb-24">
-          <Badge variant="default" className="mb-4 bg-white/10 text-white border-white/20 backdrop-blur-md px-4 py-1">
+          <Badge variant="default" className="mb-6 bg-[#FF4A17]/10 text-[#FF4A17] border-[#FF4A17]/20 backdrop-blur-md px-5 py-1.5 uppercase tracking-widest text-[10px] font-black">
             {eyebrow}
           </Badge>
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-2xl">
+          <h2 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-[0.9]">
             {title}
           </h2>
-          <p className="text-lg md:text-xl text-blue-100/80 font-light">
+          <p className="text-xl text-blue-100/60 font-light leading-relaxed">
             {subtitle}
           </p>
         </div>
 
-        <div className="relative flex flex-col space-y-24 lg:space-y-0 lg:block min-h-[600px]">
-          {steps.map((item, index) => {
-            const positions = [
-              "lg:top-0 lg:left-0",
-              "lg:top-1/4 lg:right-0 lg:text-right",
-              "lg:bottom-0 lg:left-1/4",
-            ];
+        {/* PASOS DEL PROCESO */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 relative">
+          {steps.map((item, index) => (
+            <div 
+              key={index} 
+              className="relative group transition-all duration-500 hover:-translate-y-3"
+            >
+              {/* Tarjeta de Paso */}
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 h-full flex flex-col items-center lg:items-start text-center lg:text-left shadow-2xl group-hover:bg-white/10 transition-colors">
+                
+                {/* Número del Paso (Naranja SúperClean) */}
+                <div className="w-16 h-16 rounded-2xl bg-[#FF4A17] flex items-center justify-center text-white text-3xl font-black mb-8 shadow-[0_10px_20px_rgba(255,74,23,0.4)] group-hover:scale-110 transition-transform">
+                  {index + 1}
+                </div>
+                
+                <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">
+                  {item.title}
+                </h3>
+                
+                {item.description && (
+                  <p className="text-blue-100/50 text-lg leading-relaxed font-light">
+                    {item.description}
+                  </p>
+                )}
 
-            return (
-              <div 
-                key={index} 
-                className={`relative z-10 lg:absolute ${positions[index]} transition-all duration-700 hover:scale-105`}
-              >
-                <div className={`flex flex-col ${index === 1 ? 'lg:items-end' : 'lg:items-start'} items-center`}>
-                  <ProcessStep 
-                    step={index + 1}
-                    title={item.title}
-                    description={item.description}
-                  />
+                {/* Decoración sutil al final de la tarjeta */}
+                <div className="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-12 h-1 bg-[#FF4A17] rounded-full" />
                 </div>
               </div>
-            );
-          })}
+
+              {/* Conector visual (solo en desktop) */}
+              {index < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-1/2 -right-4 translate-x-1/2 -translate-y-1/2 z-20">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF4A17" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </Section>

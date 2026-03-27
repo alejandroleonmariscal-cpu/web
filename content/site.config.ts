@@ -3,29 +3,26 @@ import { PricingSectionProps } from "../src/types/pricing";
 import { createCTA } from "@/lib/cta";
 import { createWhatsAppLink } from "@/lib/whatsapp/whatsapp";
 
-// 1. EL NÚMERO DE TELÉFONO CORREGIDO
+// 1. DATOS DE CONTACTO
 const rawPhone = "+52 311 743 4207";
-const whatsappMessage = "Hola Súperclean, me gustaría solicitar información sobre sus servicios.";
+const baseMsg = "Hola Súperclean, me gustaría solicitar información.";
 
 // 1. CONFIGURACIÓN GENERAL DEL SITIO
 export const siteConfig: SiteConfig = {
   businessName: "Lavandería y Planchaduría Súperclean",
-  tagline: "La ropa sucia ya no se lava en casa, nosotros la lavamos.",
-  // Descripción actualizada a petición del cliente
+  tagline: "La ropa sucia ya no se lava en casa, nosotros la lavamos por ti",
   description: "Lavado y planchado por encargo, para que disfrutes de tu tiempo y tengas tu ropa limpia y bien planchada.",
   state: "Nayarit", 
   phone: rawPhone,
   whatsapp: rawPhone,
-  // Dirección exacta corregida
   address: "Av. Juárez 277-B, entre P. Sánchez y 12 de Octubre. Col. Centro",
   city: "Tepic",
-  serviceArea: "Tepic y zona metropolitana",
-  // Horarios actualizados con el sábado
+  serviceArea: "Zona Centro, Cd del Valle y Libramiento",
   hours: "Lunes a Viernes de 08:30 a 19:00 | Sábados de 08:30 a 14:00",
   
   primaryCTA: createCTA({
     label: "Pedir servicio por WhatsApp",
-    href: createWhatsAppLink(rawPhone, whatsappMessage),
+    href: createWhatsAppLink(rawPhone, baseMsg),
     variant: "primary",
     isExternal: true
   }),
@@ -38,25 +35,48 @@ export const siteConfig: SiteConfig = {
   })
 };
 
-// 2. CONFIGURACIÓN DE PRECIOS 
+// 2. CONFIGURACIÓN DE PRECIOS (Convertida a Botones de Acción)
 export const pricingContent: PricingSectionProps = {
-  eyebrow: "Tarifas Transparentes",
-  title: "Precios que te encantarán",
-  subtitle: "Cuidado profesional para tu ropa con precios claros y sin sorpresas.",
-  // Facturación agregada aquí como nota de confianza
-  supportNote: "Precios sujetos a peso final o tipo de prenda. Sin cargos ocultos. ¡Facturamos tus servicios!",
+  eyebrow: "Servicios Profesionales",
+  title: "Cuidado que tu ropa merece",
+  subtitle: "Haz clic en el servicio que necesites y cotiza directamente con nosotros por WhatsApp.",
+  supportNote: "¡Facturamos todos tus servicios! Precios sujetos a peso o tipo de prenda.",
   
   pricingItems: [
-    { label: "Lavado kilo", price: "$26.00", note: "Ropa de uso normal (no lavado en seco)" },
-    { label: "Lunes de promoción en planchado", price: "$130.00", note: "Inicia la semana con todo limpio" },
-    { label: "Cobertor", price: "$95.00", note: "Limpieza profunda y suavidad" },
-    { label: "Edredón", price: "$125.00", note: "Lavado en lavadora Industrial" },
-    { label: "Planchado por docena", price: "$145.00", note: "12 piezas (Martes a Sábado)" },
-    // El servicio a domicilio fue removido de la lista de precios por estrategia
+    { 
+      label: "Lavado por kilo", 
+      ctaLabel: "Cotizar ahora", 
+      href: createWhatsAppLink(rawPhone, "Hola! Me interesa el servicio de lavado por kilo."),
+      note: "Ropa de uso normal (no lavado en seco)" 
+    },
+    { 
+      label: "Lunes de promoción en planchado", 
+      ctaLabel: "Consultar promoción", 
+      href: createWhatsAppLink(rawPhone, "Hola! Me interesa la promoción de lunes en planchado."),
+      note: "Inicia la semana con todo impecable" 
+    },
+    { 
+      label: "Cobertores", 
+      ctaLabel: "Preguntar precio", 
+      href: createWhatsAppLink(rawPhone, "Hola! Quiero preguntar el precio para lavado de cobertores."),
+      note: "Limpieza profunda y suavidad garantizada" 
+    },
+    { 
+      label: "Edredones", 
+      ctaLabel: "Pedir informes", 
+      href: createWhatsAppLink(rawPhone, "Hola! Me interesa el lavado de edredones en lavadora industrial."),
+      note: "Lavado en lavadora Industrial" 
+    },
+    { 
+      label: "Planchado por docena", 
+      ctaLabel: "Agendar servicio", 
+      href: createWhatsAppLink(rawPhone, "Hola! Quiero agendar un servicio de planchado por docena."),
+      note: "12 piezas (Martes a Sábado)" 
+    },
   ],
 
   primaryCta: {
-    label: "Agendar por WhatsApp",
-    href: createWhatsAppLink(rawPhone, whatsappMessage)
+    label: "Ver todos los servicios",
+    href: createWhatsAppLink(rawPhone, "Hola! Me gustaría conocer todos sus servicios y precios.")
   }
 };

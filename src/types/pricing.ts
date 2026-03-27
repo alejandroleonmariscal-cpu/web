@@ -2,8 +2,9 @@
 
 export interface PricingItem {
   readonly label: string;
-  readonly price: string;
-  readonly note?: string; // El "?" es clave para que sea opcional
+  readonly ctaLabel: string; // Ejemplo: "Consultar" o "Agendar"
+  readonly href: string;     // El link directo a WhatsApp
+  readonly note?: string; 
 }
 
 export interface PricingSectionProps {

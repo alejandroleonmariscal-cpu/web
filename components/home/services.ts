@@ -1,8 +1,9 @@
+// src/components/home/services.ts
+
 export const servicesContent = {
   eyebrow: "Servicios",
   title: "Servicios de lavandería en Tepic",
-  // Descripción actualizada a petición del cliente
-  subtitle: "Lavado y planchado por encargo, para que disfrutes de tu tiempo y tengas tu ropa limpia y bien planchada.",
+  subtitle: "Lavado y planchado por encargo, para que disfrutes de tu tiempo y tengas tu ropa limpia y bien planchada por ti.",
   services: [
     { 
       title: "Lavado de ropa", 
@@ -14,21 +15,33 @@ export const servicesContent = {
       description: "Planchado cuidadoso para que tus prendas luzcan impecables y listas para usar." 
     },
     { 
-      title: "Lavado de edredones", 
-      // Texto exacto solicitado por el cliente
+      title: "Edredones", 
       description: "Contamos con lavadora Industrial para la limpieza profunda y secado de sus edredones.", 
       badge: "Especialidad" 
     },
-    // Servicio nuevo agregado
     { 
       title: "Servicio Express", 
-      description: "Servicio rápido y prioritario para cuando necesitas tu ropa limpia y lista en tiempo récord.",
-      badge: "Rápido"
+      // Texto exacto pedido por el cliente
+      description: "Servicio rápido y prioritario para entrega el mismo día.",
+      badge: "Mismo día"
     },
     { 
       title: "Servicio a domicilio", 
-      // Mantenemos el servicio aquí como ventaja, pero sin mostrar el precio para proteger su estrategia
-      description: "Recogemos y entregamos en la puerta de tu casa o negocio en Tepic." 
+      // Acotado a zonas específicas para evitar Xalisco/Cantera
+      description: "Recogemos y entregamos tu ropa en tu casa o negocio. En la zona centro, Cd del Valle y Libramiento.",
+      badge: "Zona Local"
+    },
+    {
+      title: "Facturación",
+      description: "Facturamos todos tus servicios de manera rápida para tu control administrativo.",
+      badge: "Disponible"
     }
   ]
+};
+
+// Nueva data para la sección de "Única Sucursal"
+export const alertContent = {
+  title: "¡Atención! Única Sucursal",
+  description: "Para garantizar la calidad que nos distingue desde hace 20 años, te recordamos que NO contamos con sucursales. No te dejes confundir por imitaciones; visítanos únicamente en nuestro local oficial de la Av. Juárez.",
+  buttonLabel: "Ver ubicación oficial"
 };

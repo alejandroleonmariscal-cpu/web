@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 
 interface ReviewCardProps {
@@ -8,18 +10,20 @@ interface ReviewCardProps {
 
 export const ReviewCard = ({ author, quote, source }: ReviewCardProps) => {
   return (
-    <div className="flex flex-col h-full p-10 bg-white/10 backdrop-blur-[40px] border border-white/20 rounded-[2.5rem] shadow-[0_25px_50px_rgba(0,0,0,0.5)] hover:bg-white/15 transition-all duration-700 relative overflow-hidden group">
+    // CAMBIO A OSCURO: Fondo Azul Marino (#0B1B3D) para contrastar con la sección blanca
+    <div className="flex flex-col h-full p-10 bg-[#0B1B3D] border border-white/10 rounded-[2.5rem] shadow-[0_30px_60px_rgba(11,27,61,0.2)] hover:bg-[#11254d] hover:border-[#FF4A17]/30 transition-all duration-700 relative overflow-hidden group">
       
-      {/* --- DETALLES DE "ESPUMA" DECORATIVOS --- */}
-      <div className="absolute -top-12 -right-12 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors duration-700" />
-      <div className="absolute -bottom-12 -left-12 w-24 h-24 bg-blue-400/10 rounded-full blur-2xl" />
+      {/* --- DETALLES DE "ESPUMA" (Ajustados para fondo oscuro) --- */}
+      <div className="absolute -top-12 -right-12 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-[#FF4A17]/10 transition-colors duration-700" />
+      <div className="absolute -bottom-12 -left-12 w-24 h-24 bg-blue-400/5 rounded-full blur-2xl" />
 
-      {/* --- ESTRELLAS DORADAS CON GLOW --- */}
+      {/* --- ESTRELLAS EN NARANJA SÚPERCLEAN --- */}
       <div className="flex space-x-1.5 mb-8 relative z-10">
         {[...Array(5)].map((_, i) => (
           <svg 
             key={i} 
-            className="w-6 h-6 text-[#FBBF24] drop-shadow-[0_0_10px_rgba(251,191,36,0.6)] transform group-hover:scale-110 transition-transform" 
+            // Usamos el naranja #FF4A17 de la marca para las estrellas
+            className="w-6 h-6 text-[#FF4A17] drop-shadow-[0_0_12px_rgba(255,74,23,0.5)] transform group-hover:scale-110 transition-transform" 
             style={{ transitionDelay: `${i * 50}ms` }}
             fill="currentColor" 
             viewBox="0 0 20 20"
@@ -29,24 +33,26 @@ export const ReviewCard = ({ author, quote, source }: ReviewCardProps) => {
         ))}
       </div>
       
-      {/* --- CITA (TEXTO PRINCIPAL) --- */}
+      {/* --- CITA (TEXTO EN BLANCO) --- */}
       <blockquote className="flex-grow mb-10 relative z-10">
-        <p className="text-white text-xl md:text-2xl leading-relaxed font-light italic drop-shadow-sm">
+        <p className="text-white text-xl md:text-2xl leading-relaxed font-light italic opacity-95">
           "{quote}"
         </p>
       </blockquote>
       
       {/* --- PIE DE TARJETA (AUTOR) --- */}
-      <div className="mt-auto relative z-10 flex items-center justify-between border-t border-white/10 pt-8">
+      <div className="mt-auto relative z-10 flex items-center justify-between border-t border-white/5 pt-8">
         <div className="flex items-center space-x-4">
-          {/* Avatar estilo burbuja de jabón */}
-          <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white/50 text-xl shadow-inner backdrop-blur-md">
+          {/* Avatar estilo burbuja oscura */}
+          <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/30 text-xl shadow-inner backdrop-blur-md group-hover:border-[#FF4A17]/30 transition-all">
             👤
           </div>
           <div className="flex flex-col">
-            <span className="font-extrabold text-white text-lg tracking-tight">{author}</span>
+            <span className="font-extrabold text-white text-lg tracking-tight group-hover:text-[#FF4A17] transition-colors">
+                {author}
+            </span>
             {source && (
-              <span className="text-[10px] font-bold text-blue-200/50 uppercase tracking-[0.2em] mt-0.5">
+              <span className="text-[10px] font-bold text-blue-200/40 uppercase tracking-[0.2em] mt-0.5">
                 {source}
               </span>
             )}

@@ -26,24 +26,18 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
   const [bubbles, setBubbles] = useState<{id: number, size: number, left: number, duration: number, delay: number}[]>([]);
 
   useEffect(() => {
-    // 1. Lógica del Video: Cámara Lenta + Loop de 2 seg
     const video = videoRef.current;
     if (video) {
-      // Ajustamos la velocidad (0.4 es un slow-motion elegante)
       video.playbackRate = 0.4; 
-
       const handleLoop = () => {
-        // En cuanto toca el segundo 2, regresa al inicio
         if (video.currentTime >= 1.5) {
           video.currentTime = 0;
         }
       };
-
       video.addEventListener('timeupdate', handleLoop);
       return () => video.removeEventListener('timeupdate', handleLoop);
     }
 
-    // 2. Generación de Burbujas (Solo cliente para evitar Hydration Error)
     const generatedBubbles = [...Array(10)].map((_, i) => ({
       id: i,
       size: Math.random() * 30 + 10,
@@ -55,34 +49,32 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
   }, []);
 
   return (
-    <Section className="relative overflow-hidden min-h-[90vh] flex items-center pt-24 pb-12 p-0 m-0 w-full max-w-none">
+    // Fondo base blanco
+    <Section className="relative overflow-hidden min-h-[90vh] flex items-center pt-24 pb-12 p-0 m-0 w-full max-w-none bg-white">
       
-      {/* --- FONDO CINEMÁTICO: VIDEO + FALLBACK --- */}
-      <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
+      {/* --- FONDO CINEMÁTICO LIGHT (AHORA SÍ SE VE EL VIDEO) --- */}
+      <div className="absolute inset-0 z-0 w-full h-full pointer-events-none bg-white">
         <video
           ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
           poster="/images/hero-surface.webp" 
-          className="object-cover w-full h-full opacity-60 scale-110"
+          // Subimos la opacidad para que el video sea súper visible
+          className="absolute inset-0 object-cover w-full h-full opacity-60 scale-110 mix-blend-multiply"
         >
-          {/* RUTA ACTUALIZADA: public/videos/lavadoravideo.mp4 */}
           <source src="/videos/lavadoravideo.mp4" type="video/mp4" />
-          
-          {/* Imagen de respaldo por si el video no carga */}
           <img 
             src="/images/hero-surface.webp" 
             alt="Lavandería Súperclean Tepic" 
-            className="object-cover w-full h-full opacity-80 animate-slow-zoom"
+            className="absolute inset-0 object-cover w-full h-full opacity-60 mix-blend-multiply animate-slow-zoom"
           />
         </video>
         
-        {/* Capas de Gradiente: El look "Deep Blue" de SúperClean */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/60 via-[#1E3A8A]/40 to-[#1E3A8A]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/95 via-[#020617]/40 to-transparent" />
+        {/* Neblina blanca SUAVE solo a la izquierda para poder leer el texto */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/90" />
       </div>
 
       {/* --- BURBUJAS --- */}
@@ -90,14 +82,10 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
         {bubbles.map((b) => (
           <div
             key={b.id}
-            className="absolute bg-white/20 rounded-full blur-[2px] animate-float-up"
+            className="absolute bg-[#0B1B3D]/10 rounded-full blur-[2px] animate-float-up"
             style={{
-              width: `${b.size}px`,
-              height: `${b.size}px`,
-              left: `${b.left}%`,
-              bottom: '-50px',
-              animationDuration: `${b.duration}s`,
-              animationDelay: `${b.delay}s`,
+               width: `${b.size}px`, height: `${b.size}px`, left: `${b.left}%`, bottom: '-50px',
+               animationDuration: `${b.duration}s`, animationDelay: `${b.delay}s`,
             }}
           />
         ))}
@@ -105,7 +93,7 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
 
       {/* --- CONTENIDO --- */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col space-y-8 text-center lg:text-left max-w-3xl">
+        <div className="flex flex-col space-y-12 text-center lg:text-left max-w-3xl">
           
           <div className="space-y-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
@@ -114,19 +102,19 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
                   key={index} 
                   variant="default"
                   className={index === 1 
-                    ? "bg-[#22C55E]/20 text-[#4ADE80] border border-[#22C55E]/30 backdrop-blur-md" 
-                    : "bg-white/10 text-white border border-white/20 backdrop-blur-md"}
+                    ? "bg-[#FF4A17]/10 text-[#FF4A17] border border-[#FF4A17]/20 backdrop-blur-md px-4 py-1.5" 
+                    : "bg-blue-50/80 text-[#0B1B3D] border border-blue-100 backdrop-blur-md px-4 py-1.5 font-bold"}
                 >
                   {item.text}
                 </Badge>
               ))}
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-8xl font-black text-white leading-[0.95] tracking-tighter drop-shadow-2xl">
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-black text-[#0B1B3D] leading-[0.95] tracking-tighter drop-shadow-sm">
               {title}
             </h1>
             
-            <p className="text-xl md:text-3xl text-blue-50/90 max-w-2xl mx-auto lg:mx-0 leading-tight font-light drop-shadow-lg">
+            <p className="text-xl md:text-3xl text-slate-700 max-w-3xl mx-auto lg:mx-0 leading-tight font-medium drop-shadow-sm">
               {subtitle}
             </p>
           </div>
@@ -137,7 +125,7 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
               variant="primary" 
               size="lg" 
               external 
-              className="bg-[#22C55E] hover:bg-[#16a34a] text-white border-none shadow-[0_0_40px_rgba(34,197,94,0.4)] px-10 py-5 text-xl font-bold"
+              className="bg-[#FF4A17] hover:bg-[#E03A0F] text-white border-none shadow-[0_15px_30px_rgba(255,74,23,0.3)] px-10 py-5 text-xl font-black rounded-2xl transition-all hover:-translate-y-1"
             >
               {primaryCta.label}
             </Button>
@@ -145,11 +133,12 @@ export const HeroSection = ({ content }: HeroSectionProps) => {
               href={secondaryCta.href} 
               variant="outline" 
               size="lg" 
-              className="text-white border-white/30 bg-white/5 backdrop-blur-md px-10 py-5 text-xl"
+              className="text-[#0B1B3D] border-[#0B1B3D]/20 bg-white/80 hover:bg-blue-50 px-10 py-5 text-xl font-bold rounded-2xl shadow-sm transition-all"
             >
               {secondaryCta.label}
             </Button>
           </div>
+          
         </div>
       </div>
     </Section>
